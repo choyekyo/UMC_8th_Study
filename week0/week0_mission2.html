@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>week0_mission2</title>
+    <style>
+        .container {
+            width: 600px; 
+            display: grid;
+            grid-template-areas:
+                "header menu menu menu"
+                "hero hero hero hero"
+                "main main blank image"
+                "main main blank extra"
+                "banner banner banner banner";
+        }
+        .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header {
+            grid-area: header;  
+            background-color: #152542;
+            width: 150px; 
+            height: 50px;
+            color: white; 
+        }
+        .menu {
+            grid-area: menu; 
+            background-color: #ef3d4e;
+            width: 450px;
+            color: white; 
+        }
+        .hero {
+            grid-area: hero; 
+            width: 600px; 
+            height: 200px; 
+            background-color: #4a85cb;
+            color: white; 
+        }
+        .main {
+            grid-area: main; 
+            width: 250px;
+            height: 250px; 
+            background-color: #253F62;
+            color: white; 
+        }
+        .blank {
+            grid-area: blank; 
+            width: 200px;
+        }
+        .image {
+            grid-area: image; 
+            background-color: #a1dbdd;
+            width: 150px;
+        }
+        .extra {
+            grid-area: extra; 
+            background-color: #4bb4a3;
+            width: 150px;
+        }
+        .banner {
+            grid-area: banner;
+            width: 600px;  
+            height: 100px;
+            background-color: #ffdf9b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item header" >HEADER</div>
+        <div class="item menu">MENU</div>
+        <div class="item hero">HERO</div>
+        <div class="item main">MAIN</div>
+        <div class = "item blank">&nbsp; </div>
+        <div class="item image">IMAGE</div>
+        <div class="item extra">EXTRA</div>
+        <div class="item banner">BANNER</div>
+    </div>   
+</body>
+</html>
