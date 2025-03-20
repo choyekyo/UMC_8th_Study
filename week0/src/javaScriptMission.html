@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {    
+            background-color: #EDF0F7; 
+            text-align: center;
+        }
+        hr {
+            width: 80%;
+        }
+        h1 {
+            padding: 50px 0px;
+        }
+        .inputTask {
+            width: 600px;
+            height: 40px; 
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px; 
+            height: 300px; 
+        }
+        .btn {
+            background-color: #ced8ef;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        ul {
+            list-style: none;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>UMC Study Plan</h1>
+    <hr>
+    <input class="inputTask" type="text" id="inputTask" placeholder="스터디 계획을 작성해보세요!">
+
+    <div class="container">
+        <div class="list-container">
+            <h4>해야 할 일</h4>
+            <ul id="todo"></ul>
+        </div>
+        <div class="list-container">
+            <h4>해낸 일</h4>
+            <ul id="done"></ul>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("inputTask").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            addTask(); 
+        } 
+    });
+
+    function addTask() {
+        const input = document.getElementById("inputTask"); 
+        const taskText = input.value.trim();
+
+        const li = document.createElement("li");
+        li.textContent = taskText; 
+
+        const doneButton = document.createElement("button");
+        doneButton.textContent = "완료"; 
+        doneButton.className = "btn"; 
+        doneButton.onclick = function() {
+            goToDone(li, taskText); 
+        };
+
+        li.appendChild(doneButton); 
+        document.getElementById("todo").appendChild(li);
+
+        input.value = ""; 
+    }
+    function goToDone(taskItem, taskText) {
+            taskItem.remove();
+
+            const li = document.createElement("li");
+            li.textContent = taskText;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "삭제";
+            deleteButton.className = "btn";
+            deleteButton.onclick = function() {
+                li.remove();
+            };
+
+            li.appendChild(deleteButton);
+            document.getElementById("done").appendChild(li);
+        }
+</script>
+</html>
+
