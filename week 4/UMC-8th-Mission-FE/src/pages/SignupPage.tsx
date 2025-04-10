@@ -18,7 +18,8 @@ type FormFields = z.infer<typeof schema>;
 const SignupPage = () => {
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
-
+    const [showPassword, setShowPassword] = useState(false); 
+    const [showPasswordCheck, setShowPasswordCheck] = useState(false); 
     const {
         register,
         handleSubmit,
@@ -73,15 +74,18 @@ const SignupPage = () => {
                     <div className="text-white text-sm mb-1">
                         ✉ <span className="font-semibold">{getValues("email")}</span>
                     </div>
-                        <input {...register("password")} type="password" className={`border w-[300px] p-[10px] focus:outline-pink-500 rounded-sm focus:outline-2 placeholder-gray-200 text-white ${errors.password ? "border-red-500 bg-red-200 text-black" : "border-gray-200"}`}placeholder="비밀번호"/> 
-                        {errors.password && (
-                            <div className="text-red-500 text-sm">{errors.password.message}</div>
-                        )}
+                        <div className="relative w-[300px]">
+                            <input {...register("password")} type={showPassword ? "text" : "password"} className={`border w-full p-[10px] pr-10 focus:outline-pink-500 rounded-sm focus:outline-2 placeholder-gray-200 text-white ${errors.password ? "border-red-500 bg-red-200 text-black" : "border-gray-200"}`} placeholder="비밀번호"/>
+                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute top-1/2 right-2 transform -translate-y-1/2 w-5 h-5 bg-white rounded-xl">{showPassword ? (<img src="/eye-open.png"/>) : (<img src="/eye-close.png" alt="숨기기" />)}</button>
+                        </div>
+                        {errors.password && (<div className="text-red-500 text-sm">{errors.password.message}</div>)}
 
-                        <input {...register("passwordCheck")} type="password" className={`border w-[300px] p-[10px] focus:outline-pink-500 rounded-sm focus:outline-2 placeholder-gray-200 text-white ${errors.passwordCheck ? "border-red-500 bg-red-200 text-black" : "border-gray-200"}`} placeholder="비밀번호 확인"/>
-                        {errors.passwordCheck && (
-                            <div className="text-red-500 text-sm">{errors.passwordCheck.message}</div>
-                        )}
+                        <div className="relative w-[300px]">
+                            <input {...register("passwordCheck")} type={showPasswordCheck ? "text" : "password"} className={`border w-full p-[10px] pr-10 focus:outline-pink-500 rounded-sm focus:outline-2 placeholder-gray-200 text-white ${errors.passwordCheck ? "border-red-500 bg-red-200 text-black" : "border-gray-200"}`} placeholder="비밀번호 확인"/>
+                            <button type="button" onClick={() => setShowPasswordCheck(!showPasswordCheck)} className="absolute top-1/2 right-2 transform -translate-y-1/2 w-5 h-5 bg-white rounded-xl">{showPasswordCheck ? <img src="/eye-open.png"/> : <img src="/eye-close.png"/>}</button>
+                        </div>
+
+                        {errors.passwordCheck && (<div className="text-red-500 text-sm">{errors.passwordCheck.message}</div>)}
                         <button type="button"  disabled={!!errors.password || !!errors.passwordCheck} onClick={handleNext} className="w-full bg-pink-500 text-white py-3 rounded-md text-lg font-bold hover:bg-pink-700 disabled:bg-gray-700">다음</button>
                     </>
                 )}
