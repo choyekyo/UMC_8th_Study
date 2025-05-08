@@ -26,7 +26,7 @@ const HomeLayout = () => {
 
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-    }, [isSidebarOpen]);
+        }, [isSidebarOpen]);
 
     return (
         <div className="min-h-screen flex flex-col bg-[#161616]">

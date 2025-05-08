@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Lp } from "../types/lp";
-import { Comment } from "../types/comment";
-import CommentListSkeletonList from "../components/CommentCard/CommentListSkeletonList";
 import CommentList from "../components/CommentCard/CommentList";
 
 const fetchLpById = async (id: string): Promise<Lp> => {
@@ -21,17 +19,11 @@ const LpDetailPage = () => {
 		return fetchLpById(id!);
 	};
 
-	const {data: lp, isLoading, isError} = useQuery({
+	const {data: lp, isError} = useQuery({
 		queryKey: ["lpDetail", id],
 		queryFn: getLpDetail,
 		enabled: !!id,
 	});
-
-    const comments: Comment[] = [
-        { id: 1, author: "User1", content: "곡이 너무 좋아요", createdAt: "2024-04-01T10:00:00" },
-        { id: 2, author: "User2", content: "오늘부터 제 최애곡이에요!", createdAt: "2024-04-05T12:00:00" },
-        { id: 3, author: "User3", content: "자꾸만 듣고 싶어지는 곡이에요", createdAt: "2024-04-10T08:00:00" },
-    ];
 
 	if (isError || !lp) {
 		return <div className="text-red-500">Error Occurred</div>;
@@ -51,8 +43,7 @@ const LpDetailPage = () => {
 			<img src={lp.thumbnail} alt={lp.title} className="w-64 h-64 object-cover mx-auto" />
 			<h2 className="text-2xl font-bold">{lp.title}</h2>
 			<p>{lp.content}</p>
-
-            {isLoading ? (<CommentListSkeletonList count={3} />) : (<CommentList comments={comments}/>)}
+            <CommentList/>
 		</div>
 	);
 };
